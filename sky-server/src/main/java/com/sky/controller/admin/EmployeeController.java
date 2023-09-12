@@ -101,7 +101,23 @@ public class EmployeeController {
     @ApiOperation("启用禁用员工账号")
     public Result<Object> updateStatus(@PathVariable Integer status, Long id){
         log.info("启用或禁用员工：{},{}", id, status);
-        employeeService.udpateStatus(status, id);
+        employeeService.updateStatus(status, id);
+        return Result.success();
+    }
+
+    @GetMapping("/{id}")
+    @ApiOperation("根据id获取员工信息")
+    public Result<Employee> getById(@PathVariable Long id){
+        log.info("获取员工信息：{}", id);
+        Employee employee = employeeService.getById(id);
+        return Result.success(employee);
+    }
+    
+    @PutMapping
+    @ApiOperation("编辑员工")
+    public Result update(@RequestBody EmployeeDTO employeeDTO){
+        log.info("编辑员工信息：{}", employeeDTO);
+        employeeService.update(employeeDTO);
         return Result.success();
     }
 }
