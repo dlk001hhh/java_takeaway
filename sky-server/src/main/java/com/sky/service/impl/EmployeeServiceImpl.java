@@ -1,6 +1,5 @@
 package com.sky.service.impl;
 
-import com.fasterxml.jackson.databind.ser.Serializers;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.sky.constant.MessageConstant;
@@ -85,6 +84,15 @@ public class EmployeeServiceImpl implements EmployeeService {
         PageHelper.startPage(employeePageQueryDTO.getPage(), employeePageQueryDTO.getPageSize());
         Page<Employee> page = employeeMapper.pageQuery(employeePageQueryDTO);
         return new PageResult(page.getTotal(), page.getResult());
+    }
+
+    @Override
+    public void udpateStatus(Integer status, Long id) {
+        Employee employee = Employee.builder()
+                .status(status)
+                .id(id)
+                .build();
+        employeeMapper.updateStatus(employee);
     }
 
 }

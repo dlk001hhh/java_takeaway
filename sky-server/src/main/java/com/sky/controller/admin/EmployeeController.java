@@ -96,4 +96,12 @@ public class EmployeeController {
         PageResult pageResult = employeeService.page(employeePageQueryDTO);
         return Result.success(pageResult);
     }
+
+    @PostMapping("status/{status}")
+    @ApiOperation("启用禁用员工账号")
+    public Result<Object> updateStatus(@PathVariable Integer status, Long id){
+        log.info("启用或禁用员工：{},{}", id, status);
+        employeeService.udpateStatus(status, id);
+        return Result.success();
+    }
 }
