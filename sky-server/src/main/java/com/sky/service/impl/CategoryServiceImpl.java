@@ -10,7 +10,6 @@ import com.sky.entity.Category;
 import com.sky.mapper.CategoryMapper;
 import com.sky.result.PageResult;
 import com.sky.service.CategoryService;
-import org.apache.catalina.startup.Catalina;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,7 +24,7 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public List<Category> getByType(Integer type) {
-        return categoryMapper.getBytype(type);
+        return categoryMapper.getByType(type);
     }
 
     @Override
@@ -41,10 +40,10 @@ public class CategoryServiceImpl implements CategoryService {
         BeanUtils.copyProperties(categoryDTO, category);
 
         category.setStatus(StatusConstant.DISABLE);
-        category.setCreateTime(LocalDateTime.now());
-        category.setUpdateTime(LocalDateTime.now());
-        category.setCreateUser(BaseContext.getCurrentId());
-        category.setUpdateUser(BaseContext.getCurrentId());
+//        category.setCreateTime(LocalDateTime.now());
+//        category.setUpdateTime(LocalDateTime.now());
+//        category.setCreateUser(BaseContext.getCurrentId());
+//        category.setUpdateUser(BaseContext.getCurrentId());
 
         categoryMapper.addCategory(category);
     }
@@ -54,8 +53,8 @@ public class CategoryServiceImpl implements CategoryService {
         Category build = Category.builder()
                 .id(id)
                 .status(status)
-                .updateTime(LocalDateTime.now())
-                .updateUser(BaseContext.getCurrentId())
+//                .updateTime(LocalDateTime.now())
+//                .updateUser(BaseContext.getCurrentId())
                 .build();
         categoryMapper.update(build);
     }
@@ -69,8 +68,8 @@ public class CategoryServiceImpl implements CategoryService {
     public void updateCategory(CategoryDTO categoryDTO) {
         Category category = new Category();
         BeanUtils.copyProperties(categoryDTO, category);
-        category.setUpdateTime(LocalDateTime.now());
-        category.setUpdateUser(BaseContext.getCurrentId());
+//        category.setUpdateTime(LocalDateTime.now());
+//        category.setUpdateUser(BaseContext.getCurrentId());
 
         categoryMapper.update(category);
     }
